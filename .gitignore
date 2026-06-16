@@ -4,3 +4,10 @@ dist/
 .DS_Store
 
 
+
+# Config local de ferramentas
+.claude/
+
+# Python
+__pycache__/
+*.py[cod]

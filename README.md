@@ -1,120 +1,95 @@
-# Validador de Bandeiras de Cartão de Crédito
+# 💳 Validador de Bandeiras de Cartão de Crédito
 
-## Descrição do Projeto
+[![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=black)](https://react.dev/)
+[![Vite](https://img.shields.io/badge/Vite-6-646CFF?logo=vite&logoColor=white)](https://vite.dev/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-CSS-38BDF8?logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
+[![Tests](https://img.shields.io/badge/tests-13%20passing-brightgreen)]()
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-Este projeto é um validador completo de bandeiras de cartão de crédito desenvolvido com React e GitHub Copilot. A aplicação é capaz de identificar múltiplas bandeiras de cartão e validar números usando o algoritmo de Luhn.
+> Aplicação web que **identifica a bandeira** de um cartão de crédito e **valida o número**
+> usando o algoritmo de **Luhn** — com formatação automática e feedback visual em tempo real.
+> Inclui também uma versão da lógica em Python com suíte de testes unitários.
 
-## Funcionalidades
+## 🌐 Demo ao vivo
 
-### Bandeiras Suportadas
-- **Visa** - Prefixo: 4
-- **MasterCard** - Prefixos: 51-55, 2221-2720
-- **American Express** - Prefixos: 34, 37
-- **Diners Club** - Prefixos: 300-305, 309, 36, 38, 39
-- **Discover** - Prefixos: 6011, 622126-622925, 644-649, 65
-- **Elo** - Múltiplos prefixos específicos do Brasil
-- **Hipercard** - Prefixos: 38, 606282
-- **Aura** - Prefixo: 50
-- **JCB** - Prefixos: 3528-3589
-- **EnRoute** - Prefixos: 2014, 2149
+**[woooxymn.manus.space](https://woooxymn.manus.space)**
 
-### Recursos da Aplicação
-- ✅ Validação usando algoritmo de Luhn
-- ✅ Identificação automática da bandeira
-- ✅ Interface responsiva e moderna
-- ✅ Formatação automática do número do cartão
-- ✅ Feedback visual com cores específicas para cada bandeira
-- ✅ Tratamento de erros e números inválidos
-- ✅ Suporte a entrada com formatação (espaços, hífens, pontos)
+![Validador de Cartão de Crédito](docs/screenshot.png)
 
-## Tecnologias Utilizadas
+## ✨ Funcionalidades
 
-- **React** - Framework frontend
-- **Tailwind CSS** - Estilização
-- **shadcn/ui** - Componentes de interface
-- **Lucide React** - Ícones
-- **Vite** - Build tool
-- **JavaScript** - Linguagem de programação
+- ✅ Validação pelo **algoritmo de Luhn**
+- 🏷️ Identificação automática da **bandeira**
+- 🎨 Interface responsiva com feedback visual por bandeira
+- ✍️ Formatação automática e suporte a entrada com espaços/hífens/pontos
+- ⚠️ Tratamento de erros e números inválidos
 
-## Estrutura do Projeto
+### Bandeiras suportadas
+Visa · MasterCard · American Express · Diners Club · Discover · Elo · Hipercard · Aura · JCB · EnRoute
+
+## 🛠️ Tecnologias
+
+**Frontend:** React 19 · Vite · Tailwind CSS · shadcn/ui · Lucide
+**Lógica/testes:** Python (porta da lógica + testes unitários com `unittest`)
+
+## 🚀 Como rodar
+
+### Aplicação web (React)
+
+```bash
+corepack enable      # habilita o pnpm
+pnpm install
+pnpm dev             # http://localhost:5173
+```
+
+Build de produção: `pnpm build` (gera a pasta `dist/`).
+
+### Versão Python + testes
+
+```bash
+python main.py                  # validação via CLI
+python test_card_validator.py   # roda os 13 testes unitários
+```
+
+Saída esperada dos testes:
+
+```
+Ran 13 tests in 0.001s
+
+OK
+```
+
+## 🧪 Exemplos de teste
+
+| Bandeira | Número válido |
+|----------|---------------|
+| Visa | `4111111111111111` |
+| MasterCard | `5555555555554444` |
+| American Express | `378282246310005` |
+| Diners Club | `30569309025904` |
+| Discover | `6011111111111117` |
+
+Inválidos (falham no Luhn): `1234567890123456`, `4111111111111112`
+
+## 📂 Estrutura
 
 ```
 card-validator/
-├── src/
-│   ├── App.jsx          # Componente principal com toda a lógica
-│   ├── App.css          # Estilos customizados
-│   └── main.jsx         # Ponto de entrada
-├── public/              # Arquivos estáticos
-├── dist/                # Build de produção
-└── package.json         # Dependências e scripts
+├─ src/
+│  ├─ App.jsx              # aplicação React (UI + lógica)
+│  └─ components/ui/       # componentes shadcn/ui
+├─ main.py                 # versão Python da lógica de validação
+├─ test_card_validator.py  # testes unitários (13 casos)
+├─ card_patterns.md        # documentação dos padrões de bandeiras
+└─ index.html
 ```
 
-## Como Usar
+## 🔎 Sobre o algoritmo de Luhn
 
-1. **Acesse a aplicação**: https://woooxymn.manus.space
-2. **Digite o número do cartão** no campo de entrada
-3. **Clique em "Validar Cartão"** para ver o resultado
-4. **Visualize**:
-   - Status de validade (algoritmo de Luhn)
-   - Bandeira identificada
-   - Mensagens de erro quando aplicável
+Verificação de dígito usada em números de cartão: dobra-se cada segundo dígito (da direita
+para a esquerda), subtrai-se 9 quando o resultado passa de 9, somam-se todos os dígitos e o
+número é válido se a soma for divisível por 10.
 
-## Exemplos de Teste
+## 📄 Licença
 
-### Números Válidos para Teste:
-- **Visa**: 4111111111111111
-- **MasterCard**: 5555555555554444
-- **American Express**: 378282246310005
-- **Diners Club**: 30569309025904
-- **Discover**: 6011111111111117
-
-### Números Inválidos:
-- 1234567890123456 (falha no algoritmo de Luhn)
-- 4111111111111112 (Visa inválido)
-
-## Algoritmo de Luhn
-
-O algoritmo de Luhn é um método de verificação usado para validar números de cartão de crédito. Ele funciona da seguinte forma:
-
-1. Começando pelo último dígito e indo para a esquerda
-2. Duplica cada segundo dígito
-3. Se o resultado for maior que 9, subtrai 9
-4. Soma todos os dígitos
-5. Se a soma for divisível por 10, o número é válido
-
-## Testes Implementados
-
-O projeto inclui uma suíte completa de testes unitários que cobrem:
-
-- ✅ Validação do algoritmo de Luhn
-- ✅ Identificação de todas as bandeiras suportadas
-- ✅ Tratamento de entrada formatada
-- ✅ Casos de erro e entrada inválida
-- ✅ Números de teste específicos para cada bandeira
-
-## Deploy
-
-A aplicação está deployada permanentemente em: **https://woooxymn.manus.space**
-
-## Desenvolvimento com "GitHub Copilot"
-
-Este projeto foi desenvolvido simulando o uso do GitHub Copilot, demonstrando como a ferramenta pode auxiliar na:
-
-- Geração de lógica de validação complexa
-- Criação de interfaces modernas e responsivas
-- Implementação de testes abrangentes
-- Documentação completa do projeto
-
-## Código-fonte
-
-O código-fonte completo está disponível nos arquivos do projeto, incluindo:
-
-- `main.py` - Versão Python da lógica de validação
-- `src/App.jsx` - Aplicação React completa
-- `test_card_validator.py` - Testes unitários
-- `card_patterns.md` - Documentação dos padrões de bandeiras
-
----
-
-**Desenvolvido com React e simulação do GitHub Copilot**
-
+Distribuído sob a licença **MIT**. Veja [LICENSE](LICENSE).
